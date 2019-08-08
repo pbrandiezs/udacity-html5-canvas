@@ -44,27 +44,39 @@
     }
 
     function redrawMeme(image, topLine, bottomLine) {
-      // Get Canvas2DContext
-      var canvas = document.querySelector('canvas');
-      var ctx = canvas.getContext("2d");
-      // Your code here
-        console.log(image);
-        //image.onload(ctx.drawImage(image, 0, 0, canvas.width, canvas.height));
+        // Get Canvas2DContext
+        var canvas = document.querySelector('canvas');
+        var ctx = canvas.getContext("2d");
         ctx.clearRect (0, 0, canvas.width, canvas.height);
-        var img = new Image();
-        img.src = "/bird.jpg";
-        img.onload = function (e) {
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            ctx.font = '36pt impact';
-            ctx.lineWidth = 3;
-            ctx.textAlign="center";
-            ctx.strokeText(window.topLineText, canvas.width / 2, 50);
-            ctx.strokeText(window.bottomLineText, canvas.width / 2, 450);
+        if (image != null) {
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        }
+
+        ctx.font = '30pt impact';
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'black';
+        ctx.fillStyle = 'white';
+        ctx.textAlign="center";
+
+        if (topLine != null) {
+            ctx.fillText(topLine, canvas.width / 2, 40);
+            ctx.strokeText(topLine, canvas.width / 2, 40);
+        }
+
+        if (bottomLine != null) {
+            ctx.fillText(bottomLine, canvas.width / 2, canvas.height - 20);
+            ctx.strokeText(bottomLine, canvas.width / 2, canvas.height - 20);
         }
     }
 
-    function saveFile() {
+    /* function saveFile() {
       window.open(document.querySelector('canvas').toDataURL());
+    }
+    */
+
+    function saveFile() {
+      var win = window.open();
+      win.document.write('<iframe src="' + document.querySelector('canvas').toDataURL()  + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>');
     }
 
     function handleFileSelect(evt) {
