@@ -48,12 +48,19 @@
       var canvas = document.querySelector('canvas');
       var ctx = canvas.getContext("2d");
       // Your code here
+        console.log(image);
+        //image.onload(ctx.drawImage(image, 0, 0, canvas.width, canvas.height));
         ctx.clearRect (0, 0, canvas.width, canvas.height);
-        ctx.font = '36pt impact';
-        ctx.lineWidth = 3;
-        ctx.textAlign="center";
-        ctx.strokeText(window.topLineText, canvas.width / 2, 50);
-        ctx.strokeText(window.bottomLineText, canvas.width / 2, 450);
+        var img = new Image();
+        img.src = "/bird.jpg";
+        img.onload = function (e) {
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            ctx.font = '36pt impact';
+            ctx.lineWidth = 3;
+            ctx.textAlign="center";
+            ctx.strokeText(window.topLineText, canvas.width / 2, 50);
+            ctx.strokeText(window.bottomLineText, canvas.width / 2, 450);
+        }
     }
 
     function saveFile() {
